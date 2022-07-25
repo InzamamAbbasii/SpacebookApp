@@ -23,10 +23,8 @@ const Draft = ({ navigation }) => {
   const [notFound, setNotFound] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   useEffect(async () => {
-    // await ClearDraft();
     setLoading(true);
     await getDraftPosts();
-    console.log('here...');
     setLoading(false);
   }, []);
   const getDraftPosts = async () => {

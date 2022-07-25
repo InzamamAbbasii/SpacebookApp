@@ -26,21 +26,9 @@ const Profile = ({ navigation, route }) => {
       console.log('route.params : ', route.params);
       console.log('loggedin ID  : ', loggedInUser.id);
       let id = loggedInUser.id;
-      // let id =
-      //   typeof route.params.user_id === 'undefined'
-      //     ? loggedInUser.id
-      //     : route.params.user_id;
       await getUserInfo(id, loggedInUser.token);
-      // await getUserInfo(loggedInUser.id, loggedInUser.token);
-      const profile = await getProfilePhoto1(
-        id,
-        // loggedInUser.id,
-        loggedInUser.token
-      );
+      const profile = await getProfilePhoto1(id, loggedInUser.token);
       setBase64Image(profile);
-      // loggedInUser.id === id
-      //   ? setIsLoggedInUser(true)
-      //   : setIsLoggedInUser(false); //TODO: to haldle edit button
     });
     return () => unsubscribe;
   }, [navigation]);
@@ -75,8 +63,6 @@ const Profile = ({ navigation, route }) => {
       .then(async (res) => {
         if (res.status === 200) {
           await RemoveUserInfo();
-          // navigation.navigate('Login');
-          console.log('logout');
           navigation.reset({
             index: 0,
             routes: [{ name: 'Login' }],

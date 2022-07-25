@@ -23,7 +23,6 @@ const Login = ({ navigation }) => {
     } else if (password.length === 0) {
       alert('Please Enter Your Password');
     } else {
-      // var InsertApiURL = `http://${ip}:3333/api/1.0.0/login`;
       const headers = {
         'Content-Type': 'application/json',
       };

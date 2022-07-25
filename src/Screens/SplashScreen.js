@@ -16,7 +16,6 @@ const SplashScreen = () => {
           style={{
             width: width,
             height: height,
-            // marginRight: 95,
           }}
           resizeMode="cover"
           source={require('../../assets/splash.json')}

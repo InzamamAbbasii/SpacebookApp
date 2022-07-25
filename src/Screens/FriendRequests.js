@@ -149,7 +149,6 @@ const FriendRequest = ({ navigation }) => {
             </View>
           )}
           keyExtractor={(item) => item.user_id.toString()}
-          // ListHeaderComponent={renderHeader}
         />
       )}
     </View>
