@@ -1,0 +1,64 @@
+{
+    "extends": [ "airbnb","prettier","eslint:recommended"
+        , "plugin:react/recommended"
+    ],
+    "plugins": ["prettier"],
+    "rules": {
+     "no-unused-vars":"warn",
+     "func-style":"warn",
+     "quotes":"warn",
+     "no-console":"warn",
+     "no-empty-function":"warn",
+     "no-use-before-define":"off",
+     "no-undef":"off",
+     "func-names":"off",
+     "no-alert":"off",
+     "no-plusplus":"off",
+     "no-throw-literal":"off",
+     "react/prop-types": ["error", { "ignore": ["navigation","route"] }],
+     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+     "react/no-unstable-nested-components": "off",
+    //  "allowArrowFunctions": true
+    //  ,"react/function-component-definition": [2,{ "namedComponents": "function-declaration", "unnamedComponents": "arrow-function" }]
+     //  "func-names":"off"
+     "arrow-body-style": "off",
+     "camelcase":"off",
+     "no-shadow":"off",
+     "consistent-return":"off",
+     "no-nested-ternary":"off",
+     "no-unused-expressions":["error",{ "allowTernary": true, "allowShortCircuit": true }],
+     "react/no-unescaped-entities": ["off", {"forbid": ["'"]}],
+    "react/function-component-definition": ["off", { 
+        "namedComponents": "function-expression", 
+        "unnamedComponents": "function-expression"
+      }],
+      "no-restricted-syntax": ["error", "FunctionExpression", "WithStatement", "BinaryExpression[operator='in']"],
+      "no-await-in-loop":"off",
+      "no-else-return":"off",
+      "import/no-cycle": "[2, { maxDepth: 1 }]"
+
+    },
+    
+    
+    // "parser": "@babel/eslint-parser",
+    "parserOptions": {
+            // "ecmaVersion": 6,
+            // "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        
+        "declaration": { "allowArrowFunctions": true }
+      }
+    
+//    "settings": {
+//      "allowArrowFunctions":true,
+//     ,"react/function-component-definition": [
+//         2,
+//         {
+//           "namedComponents": "function-declaration" 
+//         }
+//       ]
+//    }
+
+}
