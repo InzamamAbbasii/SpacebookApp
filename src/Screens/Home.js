@@ -54,19 +54,7 @@ const Home = ({ navigation }) => {
       .then((res) => setBase64Image(res))
       .catch(() => console.log('Error in getting profile'));
 
-    //TODO: getting loggedin userinfo like name,email etc.
-    // await loggedInUserInfo(loggedInUser.id, loggedInUser.token);
-
     await getUserInfo(loggedInUser.id, loggedInUser.token);
-
-    // await GetUserData.then((res) => {
-    //   console.log(res.email, res.user_id, loggedInUser.id);
-    //   setToken(res.token);
-    //   setUser_id(res.user_id);
-    //   setFirst_name(res.first_name);
-    //   setLast_name(res.last_name);
-    //   setEmail(res.email);
-    // });
 
     //TODO: getting list of all posts of loggedin user and also his friends post
     const allPosts = await GetAllPosts(
@@ -118,14 +106,13 @@ const Home = ({ navigation }) => {
                 return {
                   ...item,
                   numLikes: item.numLikes + 1,
-                  like: !item.like,
-                  // like: true,
+                  like: true,
+                  // like: !item.like,
                 };
               }
               return {
                 ...item,
                 like: item.like,
-                // like: true,
               };
             });
             setPostList(newData);
@@ -163,14 +150,12 @@ const Home = ({ navigation }) => {
                 return {
                   ...item,
                   numLikes: item.numLikes - 1,
-                  like: !item.like,
-                  // like: false,
+                  like: false,
                 };
               }
               return {
                 ...item,
                 like: item.like,
-                // like: false,
               };
             });
             setPostList(newData);
@@ -196,7 +181,6 @@ const Home = ({ navigation }) => {
     const loggedInUser = await GetUserInfo();
     const newData = postList.map((item) => {
       if (item.post_id === selectedPostId) {
-        console.log(item.like, !item.like);
         item.like === false
           ? saveLike(post_authorId, loggedInUser.token, selectedPostId)
           : deleteLike(post_authorId, loggedInUser.token, selectedPostId);
@@ -206,6 +190,7 @@ const Home = ({ navigation }) => {
 
   // TODO: this method will delete post from database where postId=? and userId=?
   const deletePost = async (userId, postId) => {
+    console.log(userId, postId);
     const loggedInUser = await GetUserInfo();
     const headers = {
       'Content-Type': 'application/json',
@@ -318,12 +303,8 @@ const Home = ({ navigation }) => {
                         onPress={() =>
                           navigation.navigate('EditPost', {
                             post_id: item.post_id,
-                            text: item.text,
                             user_id: item.author.user_id,
                             token,
-                            first_name: item.author.first_name,
-                            last_name: item.author.last_name,
-                            email: item.author.email,
                             profile: item.author.profile,
                           })
                         }

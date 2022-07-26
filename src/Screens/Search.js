@@ -6,6 +6,7 @@ import {
   FlatList,
   Image,
   Dimensions,
+  TouchableOpacity,
 } from 'react-native';
 import { Feather, FontAwesome5 } from '@expo/vector-icons';
 import CommonStyles from './Styles/Common/CommonStyle';
@@ -142,11 +143,20 @@ const Search = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
           data={dataList}
           renderItem={({ item }) => (
-            <View style={CommonStyles.rowViewFlexStart}>
-              <Image
-                style={CommonStyles.normalImage}
-                source={{ uri: `${item.profile}` }}
-              />
+            <View style={[CommonStyles.rowViewFlexStart, { padding: 10 }]}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate('FriendProfile', {
+                    user_id: item.user_id,
+                  })
+                }
+              >
+                <Image
+                  style={CommonStyles.normalImage}
+                  source={{ uri: `${item.profile}` }}
+                />
+              </TouchableOpacity>
+
               <Text style={CommonStyles.txtAuthorName}>
                 {item.user_givenname} {item.user_familyname}
               </Text>

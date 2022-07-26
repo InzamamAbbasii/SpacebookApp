@@ -26,12 +26,12 @@ import CommonStyles from './Styles/Common/CommonStyle';
 import { post } from './API';
 
 const CreatePost = ({ navigation, route }) => {
-  // console.log(route.params);
   const [postText, setPostText] = useState('');
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
+
   const savePost = async () => {
     const headers = {
       'Content-Type': 'application/json',

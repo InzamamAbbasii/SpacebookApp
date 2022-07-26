@@ -11,7 +11,6 @@ import {
 import { MaterialIcons } from '@expo/vector-icons';
 import moment from 'moment';
 import CommonStyles from './Styles/Common/CommonStyle';
-import { postSchedules_Posts } from './API';
 import NoRecordFound from '../Components/NoRecordFound';
 import Loader2 from '../Components/Loader2';
 import {

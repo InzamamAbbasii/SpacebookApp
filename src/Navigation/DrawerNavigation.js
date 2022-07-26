@@ -32,24 +32,9 @@ const CustomDrawerContent = (props, { navigation }) => {
   useEffect(async () => {
     const loggedInUser = await GetUserInfo();
     await getUserInfo(loggedInUser.id, loggedInUser.token);
-
     await getProfilePhoto1(loggedInUser.id, loggedInUser.token)
       .then((res) => setProfile(res))
       .catch(() => console.log('Error in getting profile'));
-    // await GetUserData.then((res) => {
-    //   console.log(res.friend_count);
-    //   setUser({
-    //     user_id: res.user_id,
-    //     token: loggedInUser.token,
-    //     first_name: res.first_name,
-    //     last_name: res.last_name,
-    //     email: res.email,
-    //     friend_count: res.friend_count,
-    //     profile: res.profile,
-    //   });
-    // }).catch((err) => {
-    //   alert(err), props.navigation.navigate('Login');
-    // });
   }, []);
   const getUserInfo = async (id, token) => {
     return get(`user/${id}`, token)
@@ -60,11 +45,6 @@ const CustomDrawerContent = (props, { navigation }) => {
         throw 'Something went wrong';
       })
       .then((JsonResponse) => {
-        // setToken(token);
-        // setUser_id(JsonResponse.user_id);
-        // setFirst_name(JsonResponse.first_name);
-        // setLast_name(JsonResponse.last_name);
-        // setEmail(JsonResponse.email);
         setUser({
           user_id: JsonResponse.user_id,
           token: token,
@@ -138,7 +118,7 @@ const CustomDrawerContent = (props, { navigation }) => {
             first_name: user.first_name,
             last_name: user.last_name,
             email: user.email,
-            profile: user.profile,
+            profile: profile,
           });
         }}
       >
@@ -159,15 +139,6 @@ const CustomDrawerContent = (props, { navigation }) => {
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = ({ navigation, ScreenName }) => {
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      // do something
-      console.log('feed is focused');
-    });
-
-    return unsubscribe;
-  }, [navigation]);
-
   return (
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawerContent {...props} />}

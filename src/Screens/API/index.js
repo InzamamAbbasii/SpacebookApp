@@ -88,7 +88,6 @@ const convertImageToBase64 = async (blob) =>
 // TODO:Getting info about user i.e name email etc.
 const GetUserData = new Promise(async (resolve, reject) => {
   let loggedInUser = await GetUserInfo();
-  console.log(loggedInUser);
   await get(`user/${loggedInUser.id}`, loggedInUser.token)
     .then((res) => {
       if (typeof res !== 'undefined') {
@@ -161,9 +160,10 @@ const getAllFriends = async (token) =>
       console.log('Error in getting all friends : ');
     });
 // ------------------------------------Get post Detail-----------------------------------------------------------
-// TODO: GetPostDetail--> this method will return post detail of user in json form.
-const GetPostDetail = async (id, token) =>
-  get(`user/${id}/post`, token)
+
+// TODO: Get_SingleUser_Posts--> this method will return post detail of user in json form.
+const Get_SingleUser_Posts = async (id, token) => {
+  return get(`user/${id}/post`, token)
     .then((response) => {
       if (typeof response !== 'undefined') {
         if (response.status === 200) {
@@ -172,10 +172,13 @@ const GetPostDetail = async (id, token) =>
         else throw 'Something went wrong';
       }
     })
-    .then(async (responseJson) => responseJson)
+    .then(async (responseJson) => {
+      return responseJson;
+    })
     .catch(() => {
       console.log('error');
     });
+};
 // TODO: GetAllPosts--> this method will return sordted list of posts of user along with user profile and other detail.
 const GetAllPosts = async (id, token) => {
   const postList = [];
@@ -184,30 +187,32 @@ const GetAllPosts = async (id, token) => {
   listoffriends.push({ user_id: id }); // logged in user
   listoffriends.forEach((element) => {
     promises.push(
-      GetPostDetail(element.user_id, token)
+      Get_SingleUser_Posts(element.user_id, token)
         .then(async (postData) => {
           const picture = await getProfilePhoto1(element.user_id, token); // return profile picture
           const obj = { postData, picture };
           return obj;
         })
         .then((res) => {
-          res.postData.forEach((element) => {
-            const obj = {
-              post_id: element.post_id,
-              text: element.text,
-              timestamp: element.timestamp,
-              author: {
-                profile: res.picture,
-                user_id: element.author.user_id,
-                first_name: element.author.first_name,
-                last_name: element.author.last_name,
-                email: element.author.email,
-              },
-              numLikes: element.numLikes,
-              like: false,
-            };
-            postList.push(obj);
-          });
+          if (typeof res !== 'undefined') {
+            res.postData.forEach((element) => {
+              const obj = {
+                post_id: element.post_id,
+                text: element.text,
+                timestamp: element.timestamp,
+                author: {
+                  profile: res.picture,
+                  user_id: element.author.user_id,
+                  first_name: element.author.first_name,
+                  last_name: element.author.last_name,
+                  email: element.author.email,
+                },
+                numLikes: element.numLikes,
+                like: false,
+              };
+              postList.push(obj);
+            });
+          }
         })
         .catch((error) => {
           console.log('Error: ', error);
@@ -303,4 +308,5 @@ export {
   postSchedules_Posts,
   convertImageToBase64,
   GetUserData,
+  Get_SingleUser_Posts,
 };

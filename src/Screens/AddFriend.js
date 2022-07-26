@@ -46,6 +46,7 @@ const AddFriend = ({ navigation }) => {
       })
       .then(async (responseJson) => {
         setDataList([]);
+
         if (typeof responseJson !== 'undefined') {
           if (responseJson.length === 0) {
             setNotFound(true);
@@ -54,7 +55,7 @@ const AddFriend = ({ navigation }) => {
             let newData = responseJson.filter((item) => {
               return item.user_id != loggedInUser.id;
             });
-
+            if (newData.length == 0) setNotFound(true);
             await newData.forEach(async (element) => {
               const listoffriends = await getAllFriends(loggedInUser.token); // TODO: this will return list of all friends of loggedin user.
               const picture = await getProfilePhoto1(
@@ -114,7 +115,7 @@ const AddFriend = ({ navigation }) => {
             };
           });
           setDataList(newData);
-          alert('Request Sent Successfully!');
+          alert('Sent Successfully!');
         } else if (response.status === 401) throw 'Unauthorised';
         else if (response.status === 403)
           throw 'User is already added as a friend';

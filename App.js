@@ -37,7 +37,6 @@ export default function App() {
     if (Platform.OS === 'android') {
       const taskInfo = await checkStatusAsync();
       await registerBackgroundFetchAsync();
-      console.log(`Status : ${taskInfo.status} ${taskInfo.isRegistered}`);
     } else if (Platform.OS === 'web') {
       console.log('Background Task is not available in web');
     }
@@ -120,7 +119,11 @@ export default function App() {
             options={{ title: '' }}
           />
           <Stack.Screen name="EditProfile" component={EditProfile} />
-          <Stack.Screen name="FriendProfile" component={FriendProfile} />
+          <Stack.Screen
+            name="FriendProfile"
+            component={FriendProfile}
+            options={{ title: 'Profile' }}
+          />
           <Stack.Screen name="EditPost" component={EditPost} />
           <Stack.Screen
             name="Login"

@@ -30,7 +30,6 @@ TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
 });
 
 const registerBackgroundFetchAsync = async () => {
-  console.log('register method called...');
   return BackgroundFetch.registerTaskAsync(BACKGROUND_FETCH_TASK, {
     minimumInterval: 1, // 1 minutes
     stopOnTerminate: false, // android only,

@@ -29,8 +29,6 @@ const SignUp = ({ navigation }) => {
       alert('All fileds are required.Please Enter data.');
     } else if (password !== confirmPassword) {
       alert('Password and confirm password not match');
-    } else if (password.length <= 5) {
-      alert('password must be greater than 5 characters');
     } else {
       const headers = {
         'Content-Type': 'application/json',
@@ -45,8 +43,7 @@ const SignUp = ({ navigation }) => {
         .then((response) => {
           if (typeof response !== 'undefined') {
             if (response.status === 201) return response.json();
-            if (response.status === 400)
-              throw 'Failed validation or account already exist';
+            if (response.status === 400) throw 'Failed validation';
             else throw 'Something went wrong';
           }
         })

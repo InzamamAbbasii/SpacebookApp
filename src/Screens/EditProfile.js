@@ -116,7 +116,6 @@ const EditProfile = ({ route }) => {
   };
   const toggleBottomNavigationView = () => {
     //TODO:Toggling the visibility state of the bottom sheet
-    console.log(visible);
     setVisible(!visible);
   };
   const BottomSheetView = () => {

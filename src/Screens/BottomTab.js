@@ -21,7 +21,6 @@ const BottomTab = ({ navigation }) => {
   useEffect(async () => {
     const unsubscribe = navigation.addListener('focus', async () => {
       let loggedInUser = await GetUserInfo();
-      console.log('ID : ', loggedInUser.id);
       setLoggedInuserId(loggedInUser.id);
     });
     return () => unsubscribe;
